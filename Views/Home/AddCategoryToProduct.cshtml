@@ -1,0 +1,40 @@
+@model WrapperModel
+
+<div class="text-center">
+    <h1 class="display-4">@Model.NewProduct.Name</h1>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-6" id="border">
+        <h1>Categories</h1>
+        <ul class="list-group list-group-flush">
+            @{
+                foreach(var cat in Model.NewProduct.Categories)
+                {
+                    <li class="list-group-item">@cat.Category.Name</li>
+                }
+            }
+        </ul>
+    </div>
+    <div class="col-6">
+        <h1>Add Category</h1>
+        <div class="row">
+            <div class="col-10 offset-1">
+                <form action="/AttachCat/@Model.NewProduct.ProductId" method="post">
+                    <div class="form-group">
+                        <select name="CategoryId" class="form-control">
+                            <option disabled selected value="">Select...</option>
+                            @{
+                                foreach(var cat in Model.AllCategories)
+                                {
+                                    <option value="@cat.CategoryId">@cat.Name</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    <input type="submit" class="btn btn-outline-success" value="Add">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

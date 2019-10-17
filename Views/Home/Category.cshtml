@@ -1,0 +1,45 @@
+@{
+    ViewData["Title"] = "Category Page";
+}
+
+
+@model WrapperModel
+<div class="row">
+    <div class="col-6" id="border">
+        <div class="text-center">
+            <h1 class="display-4">New Category</h1>
+        </div>
+        <div class="row">
+            <div class="col-10 offset-1">
+                <form action="CreateCategory" method="post">
+                    <div class="form-group">
+                        <input type="text" asp-for="NewCategory.Name" class="form-control" placeholder="Category Name">
+                        <span asp-validation-for="NewCategory.Name"></span>
+                    </div>
+                    <div class="row justify-content-center">
+                        <input type="submit" class="btn btn-outline-success">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="text-center">
+            <h1 class="display-4">Browse Categories</h1>
+        </div>
+        <div class="row">
+            <div class="col-10 offset-1">
+                <ul class="list-group">
+                    @{
+                        foreach(Category cat in Model.AllCategories)
+                        {
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <a href="Category/@cat.CategoryId">@cat.Name</a>
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

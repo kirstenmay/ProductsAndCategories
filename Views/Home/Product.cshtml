@@ -1,0 +1,57 @@
+﻿@{
+    ViewData["Title"] = "Product Page";
+}
+
+@model WrapperModel
+<div class="row">
+    <div class="col-6" id="border">
+        <div class="text-center">
+            <h1 class="display-4">New Product</h1>
+        </div>
+        <div class="row">
+            <div class="col-10 offset-1">
+                <form asp-action="CreateProduct" method="post">
+                    <div class="form-group">
+                        <input asp-for="NewProduct.Name" type="text" class="form-control" placeholder="Product Name">
+                        <span asp-validation-for="NewProduct.Name"></span>
+                    </div>
+                    <div class="form-group">
+                        <textarea asp-for="NewProduct.Description" class="form-control" cols="3" placeholder="Product Description"></textarea>
+                        <span asp-validation-for="NewProduct.Description"></span>
+                    </div>
+                    <div class="form-group">
+                        <input asp-for="NewProduct.Price" type="number" min="0.00" max="100000.00" step="0.01" class="form-control" placeholder="Product Price">
+                        <span asp-validation-for="NewProduct.Price"></span>
+                    </div>
+                    <div class="row justify-content-center">
+                        <input type="submit" class="btn btn-outline-success">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="text-center">
+            <h1 class="display-4">Browse Products</h1>
+        </div>
+        <div class="row">
+            <div class="col-10 offset-1">
+                <ul class="list-group">
+                    @{
+                        foreach(Product prod in Model.AllProducts)
+                        {
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <a href="/Product/@prod.ProductId">@prod.Name</a>
+                                <span class="badge badge-primary badge-pill">@prod.Price</span>
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
